@@ -89,7 +89,11 @@ def cattle(message):
 
 @bot.message_handler(commands=['profile'])
 def profile(message):
-    bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} \n Вы быдло на {get_cattle_result(message.chat.id)[0]}% и представитель ЛГБТ на {get_lgbt_result(message.chat.id)[0]}%')
+    try:
+        bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} \n Вы быдло на {get_cattle_result(message.chat.id)[0]}% и представитель ЛГБТ на {get_lgbt_result(message.chat.id)[0]}%')
+    except TypeError:
+        bot.send_message(message.chat.id, "Вы не ввели /lgbt и/или /cattle")
+
 @bot.message_handler()
 def PingKing(message):
     if message.text == "Пинг":
